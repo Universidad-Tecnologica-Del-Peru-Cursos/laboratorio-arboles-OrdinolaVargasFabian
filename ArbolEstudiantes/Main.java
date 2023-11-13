@@ -30,5 +30,10 @@ public class Main {
         } else {
             System.out.println("Estudiante con ID " + idABuscar + " no encontrado.");
         }
+
+        arbol.eliminar(4);
+
+        System.out.println("Recorrido en Orden despues de eliminar:");
+        arbol.recorrerEnOrden();
     }
 }

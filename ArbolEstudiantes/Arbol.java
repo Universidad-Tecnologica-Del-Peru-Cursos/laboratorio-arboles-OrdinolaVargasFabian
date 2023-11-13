@@ -47,6 +47,40 @@ class Arbol {
         }
     }
 
+        public void eliminar(int id) {
+            raiz = eliminar(raiz, id);
+        }
+
+        private Nodo eliminar(Nodo nodo, int id) {
+            if (nodo == null) {
+                return null;
+            } else if (id < nodo.estudiante.getId()) {
+                nodo.izquierda = eliminar(nodo.izquierda, id);
+            } else if (id > nodo.estudiante.getId()) {
+                nodo.derecha = eliminar(nodo.derecha, id);
+            } else {
+                if (nodo.izquierda == null) {
+                    return nodo.derecha;
+                } else if (nodo.derecha == null) {
+                    return nodo.izquierda;
+                }
+
+                Nodo sucesor = valorMinimo(nodo.izquierda);
+                nodo.estudiante = sucesor.estudiante;
+                nodo.izquierda = eliminar(nodo.izquierda, sucesor.estudiante.getId());
+            }
+
+            return nodo;
+        }
+
+        private Nodo valorMinimo(Nodo nodo) {
+            Nodo actual = nodo;
+            while (actual.derecha != null) {
+                actual = actual.derecha;
+            }
+            return actual;
+        }
+
     public Estudiante buscar(int id) {
         return buscar(raiz, id);
     }
